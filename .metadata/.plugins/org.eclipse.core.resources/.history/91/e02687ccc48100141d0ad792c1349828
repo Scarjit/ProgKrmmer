@@ -1,0 +1,40 @@
+package matmultpack;
+
+import java.io.*;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Matrix {
+	public Matrix Matrix;
+	public Matrix(int n) {
+		this.Matrix = new Matrix(n);
+	}
+	public Matrix(Matrix m) {
+		this.Matrix = m.Matrix;
+	}
+	public static Matrix read(InputStream istream)
+	{
+		Scanner reader = new Scanner(istream,"ISO8859_1");
+		return null;
+	}
+	public void print(OutputStream ostream) 
+	{
+		try {
+			PrintStream writer = new PrintStream(ostream,true,"ISO8859_1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+	public void randomize() {
+		Random zufall = new Random();
+	}
+	public int getDim() {
+		return dim;
+	}
+	public double[][] getElems() {
+		return elems;
+	}
+	// final ist nur als Test gedacht (nicht erklärt)
+	private final int dim;
+	private final double[][] elems;
+}

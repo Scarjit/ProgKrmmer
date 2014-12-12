@@ -1,0 +1,22 @@
+package main;
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		File tiere = new File("Daten\\Tiere.txt");
+		Scanner input new Scanner(
+				new FileInputStream(tiere));
+		String line
+		while (input.hasNext()){
+			line = input.nextLine();
+			Zootier tier = Zootier.genZootier(line);
+		}
+		char[] tier;
+		if (tier!=null)System.out.println(tier);
+
+	}
+
+}

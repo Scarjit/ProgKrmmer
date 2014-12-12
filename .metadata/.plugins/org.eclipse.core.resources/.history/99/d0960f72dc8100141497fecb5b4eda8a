@@ -1,0 +1,5 @@
+package main;
+
+public class Beagle extends Canoidae{
+	private String[] Futter = {"Hundefutter"};
+}

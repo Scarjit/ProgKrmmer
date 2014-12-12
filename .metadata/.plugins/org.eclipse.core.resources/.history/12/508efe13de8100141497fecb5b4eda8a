@@ -1,0 +1,22 @@
+package main;
+
+public class Zootier {
+	private static int idCount = 1056;
+	protected int id = idCount++;
+	protected String[] futter;
+	public static Zootier genZootier(String line) {
+		switch(line){
+			case "Maincoon" : return new Maincoon();
+			case "Amurtiger" : return new Amurtiger();
+			case "Wolf" : return new Wolf();
+			case "Bernhardiner" : return new Bernhardiner();
+			
+		}
+		}
+	public String getFutter() {
+		String ret = "";
+		for (String s:futter){
+			ret += (s + "");
+		}
+		return ret;}
+}

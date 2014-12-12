@@ -1,0 +1,7 @@
+package main;
+
+public class Bernhardiner extends Canoidae{
+	public Bernhardiner(){
+		futter = new String[]{"Hundefutter","Cognac"};
+	}
+}

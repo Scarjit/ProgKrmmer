@@ -1,0 +1,35 @@
+package matmultpack;
+
+import java.io.*;
+import java.util.Scanner;
+import java.util.Random;
+
+public class Matrix {
+	Matrix(int n) {
+		double[][] Matrixs = new double[n][n];
+	}
+	//Matrix(Matrix m) {
+		
+	}
+	public static Matrix read(InputStream istream)
+	{
+		Scanner reader = new Scanner(istream,"ISO8859_1");
+		return null;
+	}
+	public void print(OutputStream ostream) 
+	{
+		PrintStream writer = new PrintStream(ostream,true,"ISO8859_1");
+	}
+	public void randomize() {
+		Random zufall = new Random();
+	}
+	public int getDim() {
+		return dim;
+	}
+	public double[][] getElems() {
+		return elems;
+	}
+	// final ist nur als Test gedacht (nicht erklärt)
+	private final int dim;
+	private final double[][] elems;
+}

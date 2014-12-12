@@ -1,0 +1,13 @@
+package main;
+
+public class Main {
+
+	public static void main(String[] args) {
+		File tiere = new File("Daten\\Tiere.txt");
+		Scanner input new Scanner(
+				new FileInputStream(tiere));
+		
+
+	}
+
+}

@@ -1,0 +1,7 @@
+package main;
+
+public class Amurtiger extends Feloide{
+	public Amurtiger(){
+		futter = new String[]{"Fleisch"};
+	}
+}

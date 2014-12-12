@@ -1,0 +1,11 @@
+package main;
+
+public class Bernhardiner extends Canoidae, Haustier{
+	public Bernhardiner(){
+		futter = new String[]{"Hundefutter","Cognac"};
+	}
+	@Override
+	public String toString(){
+		return "Bernhardiner: " + id + " Futter: " + getFutter();
+	}
+}
