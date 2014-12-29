@@ -1,7 +1,0 @@
-package main;
-
-public class Wolf extends Canoidae{
-	public Wolf(){
-		futter = new String[]{"Fleisch"};
-	}
-}

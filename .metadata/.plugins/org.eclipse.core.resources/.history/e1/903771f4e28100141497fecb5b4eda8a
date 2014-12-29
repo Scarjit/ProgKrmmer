@@ -1,0 +1,12 @@
+package main;
+
+public class Mainecoon extends Feloide{
+	public Mainecoon(){
+		futter = new String[]{"Katzenfutter"};
+	}
+	@Override
+	public String toString(){
+		return "Maincoon: " + id + " Futter: " + getFutter();
+	
+	}
+}

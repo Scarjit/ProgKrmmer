@@ -2,14 +2,19 @@
 <section name="Workbench">
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
-		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
-		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="G:\Kraemer"/>
+			<item value=""/>
 			<item value="G:\Kraemer\Anglerverein"/>
 			<item value="G:\Kraemer\Uebung5"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
+			<item value="C:\Users\Ferdinand Linnenberg\Dropbox\MIB-JAVA-PRIVATE\Beleg_1.zip"/>
 		</list>
+	</section>
+	<section name="NewWizardAction">
 	</section>
 </section>

@@ -1,0 +1,5 @@
+ackage main;
+
+public interface Haustier extends Zootier {
+
+}

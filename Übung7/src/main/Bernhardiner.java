@@ -11,5 +11,6 @@ public class Bernhardiner extends Canoidae implements Haustier{
 	@Override
 	public void stroke() {
 		System.out.println("Bernhardiner gestreichelt");
+		
 	}
 }

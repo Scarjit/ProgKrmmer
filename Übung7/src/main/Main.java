@@ -3,8 +3,7 @@ package main;
 import java.io.*;
 import java.util.*;
 
-public class Main {
-
+public class Main{
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception{
 		File tiere = new File("Daten\\Tiere.txt");
@@ -41,6 +40,8 @@ public class Main {
 		System.out.println("Streichelzoo:");
 		for(Haustier  haustier : streichelzoo){
 			haustier.stroke();
+		
+	
 		}
 
 	}

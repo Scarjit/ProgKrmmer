@@ -4,6 +4,7 @@ public class Zootier {
 	private static int idCount = 1056;
 	protected int id = idCount++;
 	protected String[] futter;
+	String p;
 	public static Zootier genZootier(String line) {
 		switch(line){
 			case "Maine-Coon" : return new Mainecoon();

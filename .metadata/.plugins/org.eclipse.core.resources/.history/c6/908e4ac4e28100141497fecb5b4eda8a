@@ -1,0 +1,46 @@
+package main;
+
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws Exception{
+		File tiere = new File("Daten\\Tiere.txt");
+		Scanner input = null;
+		input = new Scanner(new FileInputStream(tiere));
+		List<Feloide> katzen = new LinkedList<Feloide>();
+		List<Canoidae> hunde = new LinkedList<Canoidae>();
+		List<Haustier> streichelzoo = new LinkedList<Haustier>();
+		String line;
+		while (input.hasNext()){
+			line = input.nextLine();
+			Zootier tier = Zootier.genZootier(line);
+			//if (tier!=null)System.out.println(tier);
+			if (tier instanceof Feloide){
+				katzen.add((Feloide)tier);
+			}
+
+			if (tier instanceof Canoidae){
+				hunde.add((Canoidae)tier);
+			}
+
+			if (tier instanceof Haustier){
+				streichelzoo.add((Haustier)tier);
+			}
+		}
+		System.out.println("Katzenartige:");
+		for(Feloide katze : katzen){
+			System.out.println(katze);
+		}
+		System.out.println("Hundeartige:");
+		for(Canoidae hund : hunde){
+			System.out.println(hund);
+		}		
+		System.out.println("Streichelzoo:");
+		
+
+	}
+
+}
