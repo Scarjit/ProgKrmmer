@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class Main
+public class Main
 {
     public static void main(String[] args) {
         String[] labels = {

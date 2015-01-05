@@ -3,7 +3,6 @@ package beleg2;
 public class FluchderSchreibfeder extends Schriftrollen implements Buchhandlung{
 	public FluchderSchreibfeder(){
 		preis = new String[] {"100"};
-		type = "Fluch der Schreibfeder";
 	}
 	@Override
 	public String toString(){

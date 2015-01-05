@@ -1,0 +1,437 @@
+package beleg2;
+
+import java.io.*;
+import java.util.*;
+public class Main{
+	static Spieler[] players;
+	static List<Waffen> waffen = new LinkedList<Waffen>();
+	static List<Equipment> equipm = new LinkedList<Equipment>();
+	static List<Ringe> ringe = new LinkedList<Ringe>();
+	static int[] iequip = new int[3];
+	static boolean haveVisited[][];
+	static int sint;
+	static List<Schriftrollen> schriftrollen = new LinkedList<Schriftrollen>();
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws Exception{
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Gib die Anzahl der Spieler ein:");
+		sint = reader.nextInt();
+		File equipment = new File(".\\Data\\Equipment.txt");
+		Scanner input = null;
+		input = new Scanner(new FileInputStream(equipment));
+		if(sint==0){
+			System.out.println("Du musst mindestens einen Spieler haben damit das Spiel Starten kann");
+			System.exit(0);
+		}
+		players = new Spieler[sint];
+		haveVisited = new boolean[sint][3];
+		for(int i=0;i<sint;i++){
+			System.out.println("Gib den Namen von Spieler " + i + " an");
+			String sname = reader.next();
+			players[i]=new Spieler(sname, 1000, 0, null);
+			System.out.println("Willkommen " + sname);
+			players[i].iniRUCKSACK();
+		}
+		String line;
+		while (input.hasNext()){
+			line = input.nextLine();
+			Equipment equip = Equipment.genEquipment(line);
+			if (equip instanceof Waffen){
+				waffen.add((Waffen)equip);
+				iequip[0] += 1;
+			}
+			if (equip instanceof Ringe){
+				ringe.add((Ringe)equip);
+				iequip[1] += 1;
+			}
+
+			if (equip instanceof Schriftrollen){
+				schriftrollen.add((Schriftrollen)equip);
+				iequip[2] += 1;
+			}
+		}
+		for(Waffen s:waffen){
+			equipm.add(s);
+		}
+		for(Ringe s:ringe){
+			equipm.add(s);
+		}
+		for(Schriftrollen s:schriftrollen){
+			equipm.add(s);
+		}
+		for(int ix= 0;ix<players.length;ix++){
+			int i = 0;
+			while(players[ix].getGELD()!= 0){
+				System.out.println("----------------\nWillkommen Spieler: " + players[ix].getNAME());
+				System.out.println("----------------\nDu hast noch: "  + players[ix].getGELD() + " Geld");
+				if((players[ix].getGELD()<=200&&(haveVisited[ix][0] == false||haveVisited[ix][1] == false||haveVisited[ix][2] == false))){
+					System.out.println("Du musst von jeden Laden ein gegenstand kaufen.");
+					System.out.println("Have Visited: Schmiede: " + haveVisited[ix][0]);
+					System.out.println("Have Visited: Juwelier: " + haveVisited[ix][1]);
+					System.out.println("Have Visited: Buchhandlung: " + haveVisited[ix][2]);
+					if(haveVisited[ix][0] == false){
+						int id = Schmiede(equipm, ix);
+						if(id!=-1){
+							equipm.remove(id);
+							iequip[0] -= 1;
+						}
+					}
+					if(haveVisited[ix][1] == false){
+						int id = Juwelier(equipm, ix);
+						if(id!=-1){
+							equipm.remove(id);
+							iequip[1] -= 1;
+						}
+					}
+					if(haveVisited[ix][2] == false){
+						int id = Buchhandlung(equipm, ix);
+						if(id!=-1){
+							equipm.remove(id);
+							iequip[2] -= 1;
+						}
+					}
+				}
+				else{
+					System.out.println("----------------\nBitte wähle einen Laden aus:");
+					System.out.println("0) Schmiede");
+					System.out.println("1) Juwelier");
+						System.out.println("2) Buchhandlung");
+					int liD = reader.nextInt();
+					switch(liD){
+						case 0:{
+								int id = Schmiede(equipm, ix);
+								if(id!=-1){
+									equipm.remove(id);
+									iequip[0] -= 1;
+								}
+								break;
+						}
+						case 1:{
+							int id = Juwelier(equipm, ix);
+							if(id!=-1){
+								equipm.remove(id);
+								iequip[1] -= 1;
+							}
+							break;
+						}
+						case 2:{
+							int id = Buchhandlung(equipm, ix);
+							if(id!=-1){
+								equipm.remove(id);
+								iequip[2] -= 1;
+							}
+							break;
+						}
+						default: System.out.println("Bitte gib einen gültigen Laden an"); break;			
+					}
+				}
+			}
+			System.out.println("\n--------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------\n");
+			
+			i++;
+		}
+		Endgame();
+	}
+	@SuppressWarnings("resource")
+	public static int Schmiede(List<Equipment> equipm2, int player) throws Exception{
+		if((equipm2.size() != 0 )&&(iequip[0] != 0)){
+			System.out.println("\n----------------\nWillkommen in der Schmiede");
+			System.out.println("----------------\nVerfügbare Waffen:");
+			int i = 0;
+			int sid = 9999;
+			int smx = 0;
+			for(Equipment schmied1 : equipm2){
+				if(schmied1 instanceof Waffen){
+					smx += 1;
+					if(i<sid){
+						sid = i;
+					}
+					System.out.println("ID: " + i + Fancyout(schmied1) + " kostet: " + schmied1.getPreis());
+				}	
+				i++;
+			}
+			System.out.println("----------------\nZu kaufende Waffe (per ID):");
+			Scanner readers = new Scanner(System.in);
+			int id = readers.nextInt();
+			if((id>=equipm2.size())||id<sid||!(id<smx)){
+				System.out.println("Id fehlerhaft");
+				System.out.println("sid: " +sid);
+				System.out.println("id: " + id);
+				return -1;
+			}
+			else{
+				String[] x = {""};
+				x = Equipment.preis;
+				int n = Integer.parseInt(x[0]);
+				if(n <= players[player].getGELD()){
+					players[player].setGELD(players[player].getGELD()-n);
+					((beleg2.Schmiede) equipm2.get(id)).kaufen();
+					players[player].addRUCKSACK(equipm2.get(id));
+					haveVisited[player][0] = true;
+					return id;
+				}
+				else{
+					return -1;
+				}
+			}
+		}
+		else{
+			System.out.println("\n----------------\nWillkommen in der Schmiede");
+			System.out.println("----------------\nEs gibt leider keine Waffen mehr zu kaufen");
+			System.out.println("----------------\n\n\n");
+			return -1;
+		}
+	}
+	@SuppressWarnings("resource")
+	public static int Juwelier(List<Equipment> equipm2, int player) throws Exception{
+		if((equipm2.size() != 0 )&&(iequip[1] != 0)){
+			System.out.println("\n----------------\nWillkommen beim Juwelier");
+			System.out.println("----------------\nVerfügbare Ringe:");
+			int i = 0;
+			int sid = 9999;
+			int smx = 0;
+			for(Equipment juwelier1 : equipm2){
+				if(juwelier1 instanceof Ringe){
+					smx += 1;
+					if(i<sid){
+						sid = i;
+					}
+					System.out.println("ID: " + i + Fancyout(juwelier1) + " kostet: " + juwelier1.getPreis());
+				}	
+				i++;
+			}
+			System.out.println("----------------\nZu kaufender Ring (per ID):");
+			Scanner readers = new Scanner(System.in);
+			int id = readers.nextInt();
+			if((id>=equipm2.size())||id<sid||!(id<smx)){
+				System.out.println("Id fehlerhaft");
+				System.out.println("sid: " +sid);
+				System.out.println("id: " + id);
+				return -1;
+			}
+			else{
+				String[] x = {""};
+				x = Equipment.preis;
+				int n = Integer.parseInt(x[0]);
+				if(n <= players[player].getGELD()){
+					players[player].setGELD(players[player].getGELD()-n);
+					((beleg2.Juwelier) equipm2.get(id)).kaufen();
+					players[player].addRUCKSACK(equipm2.get(id));
+					haveVisited[player][0] = true;
+					return id;
+				}
+				else{
+					return -1;
+				}
+			}
+		}
+		else{
+			System.out.println("\n----------------\nWillkommen beim Juwelier");
+			System.out.println("----------------\nEs gibt leider keine Ringe mehr zu kaufen");
+			System.out.println("----------------\n\n\n");
+			return -1;
+		}
+	}
+	@SuppressWarnings("resource")
+	public static int Buchhandlung(List<Equipment> equipm2, int player) throws Exception{
+		if((equipm2.size() != 0 )&&(iequip[1] != 0)){
+			System.out.println("\n----------------\nWillkommen in der Buchhandlung");
+			System.out.println("----------------\nVerfügbare Schriftrollen:");
+			int i = 0;
+			int sid = 9999;
+			int smx = 0;
+			for(Equipment buchhandlung1 : equipm2){
+				if(buchhandlung1 instanceof Schriftrollen){
+					smx += 1;
+					if(i<sid){
+						sid = i;
+					}
+					System.out.println("ID: " + i + Fancyout(buchhandlung1) + " kostet: " + buchhandlung1.getPreis());
+				}	
+				i++;
+			}
+			System.out.println("----------------\nZu kaufende Schriftrolle (per ID):");
+			Scanner readers = new Scanner(System.in);
+			int id = readers.nextInt();
+			if((id>=equipm2.size())||id<sid||!(id<smx)){
+				System.out.println("Id fehlerhaft");
+				System.out.println("sid: " +sid);
+				System.out.println("id: " + id);
+				return -1;
+			}
+			else{
+				String[] x = {""};
+				x = Equipment.preis;
+				int n = Integer.parseInt(x[0]);
+				if(n <= players[player].getGELD()){
+					players[player].setGELD(players[player].getGELD()-n);
+					((beleg2.Juwelier) equipm2.get(id)).kaufen();
+					players[player].addRUCKSACK(equipm2.get(id));
+					haveVisited[player][0] = true;
+					return id;
+				}
+				else{
+					return -1;
+				}
+			}
+		}
+		else{
+			System.out.println("\n----------------\nWillkommen in der Buchhandlung");
+			System.out.println("----------------\nEs gibt leider keine Schriftrollen mehr zu kaufen");
+			System.out.println("----------------\n\n\n");
+			return -1;
+		}
+	}
+
+	@SuppressWarnings("static-access")
+	public static void Endgame(){
+		System.out.println("Das Spiel ist zuende.");
+		System.out.println("Stats:");
+		for(int i=0;i<sint;i++){
+			System.out.println("Spieler " + i + " hat folgenden Rucksackinhalt:\n");
+			List<Equipment> bp = players[i].getRUCKSACK();
+			for(int i2=0;i2<players[i].getRUCKSACK().size();i2++){
+				System.out.println("* " + bp.get(i2));
+				System.out.println("* " + Fancyout(bp.get(i2)));
+			}
+		}
+		for(int i=0;i<sint;i++){
+			List<Equipment> bp = players[i].getRUCKSACK();
+			for(int i2=0;i2<bp.size();i2++){
+				if(bp.get(i2) instanceof AugenvonHypnos){
+					System.out.println("Augen von Hypnos gefunden: ");
+					System.out.println("Alle Monster in der Umgebung wurden gelähmt.");
+				}
+			}
+			//Silber und Goldring stuff
+			if(sint==1){
+				for(int i2=0;i2<bp.size();i2++){
+					if(bp.get(i2) instanceof FluchderSchreibfeder){
+						System.out.println("Fluch der Schreibfeder gefunden: ");
+						System.out.println("Du konntest keine Waffen zerstören,");
+						System.out.println("da du der einzige Spieler bist.");
+					}
+				}
+			}
+			else{
+				for(int i2=0;i2<bp.size();i2++){
+					if(bp.get(i2) instanceof FluchderSchreibfeder){
+						System.out.println("Fluch der Schreibfeder gefunden: ");
+						System.out.println("Zerstöre alle gegnerischen Schwerter im Radius von 1");
+						System.out.println("[DEBUG] sint: " + sint);
+						System.out.println("[DEBUG] i: " + i);
+						if(i==0){
+							System.out.println("[DEBUG] Player 0 found");
+						}
+						if(i+1>sint){
+							System.out.println("[DEBUG] Last Player found");
+						}
+						if(i+1>sint){
+							for(int i3=0;i3<players[i-1].getRUCKSACK().size();i3++){
+								if(players[i-1].getRUCKSACK().get(i3) instanceof Schwert){
+									players[i-1].remRUCKSACK(i3);
+								}
+							}
+						}
+						if(i+1>sint){
+							for(int i3=0;i3<players[i+1].getRUCKSACK().size();i3++){
+								if(players[i+1].getRUCKSACK().get(i3) instanceof Schwert){
+									players[i+1].remRUCKSACK(i3);
+								}
+							}
+						}
+					
+					}
+					
+				}
+			}
+		}
+		for(int i4=0;i4<sint;i4++){
+			List<Equipment> bp = players[i4].getRUCKSACK();
+			for(int i5=0;i5<bp.size();i5++){
+				if((bp.get(i5) instanceof Schwert)||(bp.get(i5) instanceof Bogen)){
+					players[i4].setKAMPFSTÄRKE(players[i4].getKAMPFSTÄRKE()+1);
+				}
+			}
+			System.out.println("Spieler " + i4 + " hat " + players[i4].getKAMPFSTÄRKE() + " Kampfstärke");
+		}
+	}
+	public static String Fancyout(Equipment args1){
+		if(args1 instanceof FluchderSchreibfeder){
+			return "Fluch der Schreibfeder";
+		}
+		if(args1 instanceof AugenvonHypnos){
+			return "Augen von Hypnos";
+		}
+		if(args1 instanceof Bogen){
+			return "Bogen";
+		}
+		if(args1 instanceof Schwert){
+			return "Schwert";
+		}
+		if(args1 instanceof GoldRing){
+			return "Gold Ring";
+		}
+		if(args1 instanceof FluchderSchreibfeder){
+			return "Silber Ring";
+		}
+		else{
+			return "";
+		}
+	}
+	public static void equipgen(int args) throws Exception {
+		int[] gen = new int[6];
+		for(int i=0;i<gen.length;i++){
+			gen[i]=0;
+		}
+		File f = new File(".\\Data\\Equipment.txt");
+		OutputStream ostream = new FileOutputStream(f);
+		PrintWriter writer = new PrintWriter(ostream);
+		Random zufall = new Random();
+		int anzahl = ((args*10)+15);
+		for(int i = 0; i < anzahl; i++){
+			switch(zufall.nextInt(6)){
+				case 0:
+					writer.println("Schwert");
+					System.out.println("Schwert");
+					gen[0]++;
+					break;
+				case 1:
+					writer.println("Bogen");		
+					System.out.println("Bogen");
+					gen[1]++;
+					break;
+				case 2:
+					writer.println("SilberRing");
+					System.out.println("Silber Ring");
+					gen[2]++;
+					break;
+				case 3:
+					writer.println("GoldRing");
+					System.out.println("Gold Ring");
+					gen[3]++;
+					break;
+				case 4:
+					writer.println("Fluch_der_Schreibfeder");
+					System.out.println("Fluch der Schreibfeder");			
+					gen[4]++;
+					break;
+				case 5:
+					writer.println("Augen_von_Hypnos");
+					System.out.println("Augen von Hypnos");	
+					gen[5]++;
+					break;
+				default:
+			}
+		}
+		writer.close();
+		System.out.println("\n");
+		for(int i=0;i<gen.length;i++){
+			System.out.println(gen[i]);
+		}
+	}
+
+}

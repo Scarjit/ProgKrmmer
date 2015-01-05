@@ -3,7 +3,6 @@ package beleg2;
 public class Bogen extends Waffen implements Schmiede{
 	public Bogen(){
 		preis = new String[] {"100"};
-		type = "Bogen";
 	}
 	@Override
 	public String toString(){

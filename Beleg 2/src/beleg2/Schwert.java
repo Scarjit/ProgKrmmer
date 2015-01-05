@@ -3,7 +3,6 @@ package beleg2;
 public class Schwert extends Waffen implements Schmiede{
 	public Schwert(){
 		preis = new String[] {"100"};
-		type = "Schwertz";
 	}
 	@Override
 	public String toString(){

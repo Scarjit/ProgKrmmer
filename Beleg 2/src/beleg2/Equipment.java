@@ -4,7 +4,6 @@ public class Equipment {
 	private static int idCount = 0;
 	protected int id = idCount++;
 	protected static String[] preis;
-	protected static String type;
 	public static Equipment genEquipment(String line){
 		switch(line){
 			case "Schwert": return new Schwert();
@@ -24,8 +23,5 @@ public class Equipment {
 			ret += (s + "");
 		}
 		return ret;
-	}
-	public static String getEType(){
-		return type;
 	}
 }

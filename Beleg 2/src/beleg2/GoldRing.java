@@ -3,7 +3,6 @@ package beleg2;
 public class GoldRing extends Ringe implements Juwelier{
 	public GoldRing(){
 		preis = new String[] {"100"};
-		type = "Gold Ring";
 	}
 	@Override
 	public String toString(){

@@ -3,7 +3,6 @@ package beleg2;
 public class AugenvonHypnos extends Schriftrollen implements Buchhandlung{
 	public AugenvonHypnos(){
 		preis = new String[] {"100"};
-		type = "Augen von Hypnos";
 	}
 	@Override
 	public String toString(){
