@@ -1,0 +1,6 @@
+package secint;
+
+public interface PositionInterfae {
+	public Item getItem();
+	public Spieler getSpieler(); 
+}

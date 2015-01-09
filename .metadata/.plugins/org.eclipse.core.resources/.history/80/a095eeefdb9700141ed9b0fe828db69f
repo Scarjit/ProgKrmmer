@@ -1,0 +1,5 @@
+package secint;
+
+public interface Position {
+
+}

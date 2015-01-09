@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ExternalProjectImportWizard">
-		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
-		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="true" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="F:\Programmierung\Beleg2"/>
+			<item value="F:\Beleg2Neu"/>
+			<item value="F:\Richtiger Beleg\Beleg02"/>
+			<item value="F:\Beleg02"/>
 			<item value="G:\Kraemer"/>
-			<item value=""/>
-			<item value="G:\Kraemer\Anglerverein"/>
-			<item value="G:\Kraemer\Uebung5"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>

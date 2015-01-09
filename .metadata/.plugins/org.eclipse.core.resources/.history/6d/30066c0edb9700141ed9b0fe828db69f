@@ -1,0 +1,8 @@
+package secint;
+
+public class Spieler {
+	protected static String Vorname;
+	protected static String Nachname;
+	protected static String Spitzname;
+	protected static List<Item> Rucksack;
+}

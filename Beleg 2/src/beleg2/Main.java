@@ -7,10 +7,10 @@ public class Main{
 	static List<Waffen> waffen = new LinkedList<Waffen>();
 	static List<Equipment> equipm = new LinkedList<Equipment>();
 	static List<Ringe> ringe = new LinkedList<Ringe>();
+	static List<Schriftrollen> schriftrollen = new LinkedList<Schriftrollen>();
 	static int[] iequip = new int[3];
 	static boolean haveVisited[][];
 	static int sint;
-	static List<Schriftrollen> schriftrollen = new LinkedList<Schriftrollen>();
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception{
 		Scanner reader = new Scanner(System.in);
@@ -315,15 +315,27 @@ public class Main{
 			List<Equipment> bp = players[i].getRUCKSACK();
 			for(int i2=0;i2<bp.size();i2++){
 				if(bp.get(i2) instanceof AugenvonHypnos){
-					System.out.println("Augen von Hypnos gefunden: ");
+					System.out.println("Augen von Hypnos gefunden für Spieler " + i);
 					System.out.println("Alle Monster in der Umgebung wurden gelähmt.");
 				}
 			}
-			//Silber und Goldring stuff
+			for(int i2=0;i2<bp.size();i2++){
+				if(bp.get(i2) instanceof GoldRing){
+					System.out.println("Gold Ring gefunden für Spieler " + i);
+					System.out.println("Alle Monster in der Umgebung wurden gezähmt");
+				}
+			}
+			for(int i2=0;i2<bp.size();i2++){
+				if(bp.get(i2) instanceof SilberRing){
+					System.out.println("Silber Ring gefunden für Spieler " + i +"\nKampfstärke um 2 erhöht");
+					players[i].setKAMPFSTÄRKE(players[i].getKAMPFSTÄRKE()+2);
+				}
+			}
+
 			if(sint==1){
 				for(int i2=0;i2<bp.size();i2++){
 					if(bp.get(i2) instanceof FluchderSchreibfeder){
-						System.out.println("Fluch der Schreibfeder gefunden: ");
+						System.out.println("Fluch der Schreibfeder gefunden für Spieler " + i);
 						System.out.println("Du konntest keine Waffen zerstören,");
 						System.out.println("da du der einzige Spieler bist.");
 					}
@@ -332,7 +344,7 @@ public class Main{
 			else{
 				for(int i2=0;i2<bp.size();i2++){
 					if(bp.get(i2) instanceof FluchderSchreibfeder){
-						System.out.println("Fluch der Schreibfeder gefunden: ");
+						System.out.println("Fluch der Schreibfeder gefunden für Spieler " + i);
 						System.out.println("Zerstöre alle gegnerischen Schwerter im Radius von 1");
 						if(i-1>=0){
 							for(int i3=0;i3<players[i-1].getRUCKSACK().size();i3++){

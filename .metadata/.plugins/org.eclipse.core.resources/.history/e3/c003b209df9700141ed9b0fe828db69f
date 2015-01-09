@@ -1,0 +1,13 @@
+package secint;
+
+import java.util.Random;
+
+public class Item {
+	public static Item genItem(){
+		Random zufall = new Random();
+		switch(zufall.nextInt(1)){
+			
+			
+		}
+	}
+}

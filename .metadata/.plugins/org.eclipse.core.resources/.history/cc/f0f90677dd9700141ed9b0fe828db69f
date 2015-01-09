@@ -1,0 +1,22 @@
+package secint;
+
+
+public class Spielfeld {
+	protected static int Größe;
+	protected static Position[][] Spielfeld;
+	public static int getGröße() {
+		return Größe;
+	}
+	public static void setGröße(int größe) {
+		Größe = größe;
+	}
+	public static Position[][] getSpielfeld() {
+		return Spielfeld;
+	}
+	public static void setSpielfeld(Position[][] spielfeld) {
+		Spielfeld = spielfeld;
+	}
+	public static void genSpielfeld(int n){
+		Spielfeld = Position[n][n]
+	}
+}

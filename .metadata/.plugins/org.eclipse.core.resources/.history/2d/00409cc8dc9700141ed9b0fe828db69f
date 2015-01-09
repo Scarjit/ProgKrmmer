@@ -1,0 +1,13 @@
+package secint;
+
+public class GlobalVarStorage {
+	protected int sint = 0;
+
+	public int getSint() {
+		return sint;
+	}
+
+	public static void setSint(int sint) {
+		this.sint = sint;
+	}
+}

@@ -1,0 +1,7 @@
+package secint;
+
+
+public class Spielfeld {
+	protected static int Größe;
+	protected static Position[][] Spielfeld;
+}

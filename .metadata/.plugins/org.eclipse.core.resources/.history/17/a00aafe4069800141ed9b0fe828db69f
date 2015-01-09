@@ -1,0 +1,17 @@
+package secint;
+
+import java.util.Random;
+
+public class Item extends Spielfeld{
+	public static Item genItem(){
+		Random zufall = new Random();
+		switch(zufall.nextInt(5)){
+			case 0: return new GrosserHeiltrank();
+			case 1: return new KleinerHeiltrank();
+			case 2: return new GroﬂerManatrank();
+			case 3: return new KleinerManatrank();
+			
+			default: return new Spieler();
+		}
+	}
+}

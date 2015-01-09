@@ -1,0 +1,13 @@
+package beleg2;
+
+public class GlobalVarStorage {
+	protected int sint = 0;
+
+	public int getSint() {
+		return sint;
+	}
+
+	public void setSint(int sint) {
+		this.sint = sint;
+	}
+}

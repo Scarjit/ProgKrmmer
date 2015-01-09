@@ -1,0 +1,8 @@
+package secint;
+
+import java.util.List;
+
+public class Spielfeld {
+	protected static int Größe;
+	protected static ArrayList<Item,Item> Spielfeld;
+}

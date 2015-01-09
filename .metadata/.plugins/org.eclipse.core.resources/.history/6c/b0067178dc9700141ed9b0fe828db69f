@@ -1,0 +1,5 @@
+package beleg2;
+
+public class GlobalVarStorage {
+	int sint = 0;
+}

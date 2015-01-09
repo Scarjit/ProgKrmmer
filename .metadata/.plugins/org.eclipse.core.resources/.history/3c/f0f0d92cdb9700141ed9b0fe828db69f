@@ -1,0 +1,11 @@
+package secint;
+
+import java.util.List;
+
+public class Spieler {
+	protected static String Vorname;
+	protected static String Nachname;
+	protected static String Spitzname;
+	protected static List<Item> Rucksack;
+	protected static int[][] Position;
+}

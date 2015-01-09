@@ -1,0 +1,33 @@
+package secint;
+
+public class Position implements PositionInterface{
+	public Item PItem;
+	public Spieler PSpieler;
+	public int X;
+	public int Y;
+	@Override
+	public Item getItem() {
+		return PItem;
+	}
+	public void setItem(Item NItem){
+		PItem = NItem;
+	}
+	@Override
+	public Spieler getSpieler() {
+		return PSpieler;
+	}
+	public void setSpieler(Spieler NSpieler) {
+		PSpieler = NSpieler;
+	}
+
+	@Override
+	public int getY() {
+		return Y;
+	}
+
+	@Override
+	public int getX() {
+		return X;
+	}
+
+}

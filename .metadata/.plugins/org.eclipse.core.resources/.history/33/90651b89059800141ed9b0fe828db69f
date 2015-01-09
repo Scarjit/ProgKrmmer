@@ -1,0 +1,42 @@
+package secint;
+
+import java.util.List;
+
+public class Spieler {
+	protected static String Vorname;
+	protected static String Nachname;
+	protected static String Spitzname;
+	protected static List<Item> Rucksack;
+	protected static int[][] Position;
+	public static String getVorname() {
+		return Vorname;
+	}
+	public void setVorname(String vorname) {
+		Vorname = vorname;
+	}
+	public static String getNachname() {
+		return Nachname;
+	}
+	public static void setNachname(String nachname) {
+		Nachname = nachname;
+	}
+	public static String getSpitzname() {
+		return Spitzname;
+	}
+	public static void setSpitzname(String spitzname) {
+		Spitzname = spitzname;
+	}
+	public static List<Item> getRucksack() {
+		return Rucksack;
+	}
+	public static void setRucksack(List<Item> rucksack) {
+		Rucksack = rucksack;
+	}
+	public static int[][] getPosition() {
+		return Position;
+	}
+	public static void setPosition(int[][] position) {
+		Position = position;
+	}
+	
+}
