@@ -33,6 +33,7 @@ public class Spielfeld {
 					Spielfeld[i][i2].setItem(null);
 					if(VSpieler != 0){
 						Spielfeld[i][i2].setSpieler(new Spieler());
+						Spielfeld[i][i2].getSpieler().setPos(i, i2);;
 						Scanner reader = new Scanner(System.in);
 						System.out.println("Gib den Vornamen von Spieler " + VSpieler + " an");
 						Spielfeld[i][i2].getSpieler().setVorname(reader.nextLine());
@@ -47,7 +48,7 @@ public class Spielfeld {
 						}
 						if(NewSp.length()<17){
 							int x = 17-NewSp.length();
-							for(int i3=0;NewSp.length()<=x;i3++){
+							while(NewSp.length()<=x){
 								NewSp += " ";
 							}
 						}
@@ -56,8 +57,6 @@ public class Spielfeld {
 						setVSpieler(getVSpieler()-1);
 					}
 				}
-				//Wenn Spielfeld[i][i2] = null dann Spieler einfügen.
-				//Genug Platz für Player lassen !!!!!!.
 			}
 		}
 	}

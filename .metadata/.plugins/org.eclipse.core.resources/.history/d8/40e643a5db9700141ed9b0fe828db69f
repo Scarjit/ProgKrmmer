@@ -1,8 +1,0 @@
-package secint;
-
-import java.util.Map;
-
-public class Spielfeld {
-	protected static int Größe;
-	protected static Map<List> Spielfeld;
-}

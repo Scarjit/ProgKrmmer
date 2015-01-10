@@ -10,16 +10,18 @@ public class Main {
 		System.out.println("Gib die Anzahl der Spieler ein:");
 		GlobalVarStorage.setSint(reader.nextInt());
 		Spielfeld.setVSpieler(GlobalVarStorage.getSint());
-		System.out.println("Gib die Feldgröße ein:");
+		System.out.println("Gib die Feldgröße ein: (Mindestens " + (3+GlobalVarStorage.getSint()) + ")");
 		Spielfeld.setGröße(reader.nextInt());
-		if(Spielfeld.getGröße()<=0){
+		if(Spielfeld.getGröße()<(3+GlobalVarStorage.getSint())){
 			System.out.println("Spielfeldgröße zu gering.");
 			System.exit(1);
 		}
 		Spielfeld.genSpielfeld(Spielfeld.getGröße());
-	//	System.out.println(Spielfeld.getSpielfeld()[0][0]);
 		Spielfeld.graphOut();
-		
+		//TODO: Spieler dürfen sich bewegen.
+		//TODO: Spieler sammel Items ein
+		Spieler.bewegen('W');
+		Spielfeld.graphOut();
 	}
 
 }
